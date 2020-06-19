@@ -21,12 +21,14 @@ public class Cart {
 	private Integer nbPerson;
 	@Column(name="TRIP_ID")
 	private Long tripId;
-	@Column(name="USER_ID")
+	@Column(name="USER_ID", unique=true)
 	private Long userId;
 	@Column(name="TOTAL_PRICE")
 	private Long totalPrice;
 	
-	
+	public Cart() {
+		
+	}
 	
 	public Cart(Long id, Integer nbPerson, Long idTrip, Long idUser, Long totalPrice) {
 		super();

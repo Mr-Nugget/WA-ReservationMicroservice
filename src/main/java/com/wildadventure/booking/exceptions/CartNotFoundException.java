@@ -1,4 +1,4 @@
-package com.wildadventure.booking.exception;
+package com.wildadventure.booking.exceptions;
 
 public class CartNotFoundException extends Exception {
 

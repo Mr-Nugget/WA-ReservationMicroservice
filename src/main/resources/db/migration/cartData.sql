@@ -1,0 +1,1 @@
+INSERT INTO CART (cart_id, user_id, trip_id, nb_person, total_price) VALUES(1, 1, 1, 2, 1500.00)

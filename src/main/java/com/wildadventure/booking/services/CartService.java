@@ -14,18 +14,16 @@ public class CartService implements ICartService {
 
 	@Override
 	public Cart getCartByUser(Long userId) {
-		// TODO Auto-generated method stub
-		return null;
+		return cartDao.findByUserId(userId);
 	}
 
 	@Override
 	public Cart addCart(Cart cart) {
-		// TODO Auto-generated method stub
-		return null;
+		return cartDao.save(cart);
 	}
 
 	@Override
-	public Cart getCatById(Long id) {
+	public Cart getCartById(Long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -40,6 +38,16 @@ public class CartService implements ICartService {
 	public Cart addTrip(Long cartId, Long tripId, Integer nbPerson) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Cart updateCart(Cart cart) {
+		return cartDao.save(cart);
+	}
+
+	@Override
+	public Boolean cartExists(Long userId) {
+		return cartDao.existsByUserId(userId);
 	}
 
 }

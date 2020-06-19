@@ -8,9 +8,13 @@ public interface ICartService {
 	
 	public Cart addCart(Cart cart);
 	
-	public Cart getCatById(Long id);
+	public Cart getCartById(Long id);
 	
 	public void cleanCart(Long cartId);
 	
 	public Cart addTrip(Long cartId, Long tripId, Integer nbPerson);
+	
+	public Cart updateCart(Cart cart);
+	
+	public Boolean cartExists(Long cartId);
 }

@@ -15,4 +15,6 @@ public interface ICartDao extends JpaRepository<Cart, Long>{
 	
 	public Cart findByUserId(Long userId);
 	
+	public Boolean existsByUserId(Long userId);
+	
 }
