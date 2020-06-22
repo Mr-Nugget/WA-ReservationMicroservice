@@ -30,9 +30,10 @@ public class Booking {
 	@Column(name="PAYED")
 	private Boolean payed;
 	@Column(name="USER_ID")
-	private Long idUser;
+	private Long userId;
+	// Id of the trip instance not the description of it
 	@Column(name="TRIP_ID")
-	private Long idTrip;
+	private Long tripId;
 	
 	public Booking(Long id, Integer nbPerson, Date date, Integer status, Boolean payed, Long idUser, Long idTrip) {
 		super();
@@ -41,8 +42,8 @@ public class Booking {
 		this.date = date;
 		this.status = status;
 		this.payed = payed;
-		this.idUser = idUser;
-		this.idTrip = idTrip;
+		this.userId = idUser;
+		this.tripId = idTrip;
 	}
 	
 	public Long getId() {
@@ -75,23 +76,23 @@ public class Booking {
 	public void setPayed(Boolean payed) {
 		this.payed = payed;
 	}
-	public Long getIdUser() {
-		return idUser;
+	public Long getUserId() {
+		return userId;
 	}
-	public void setIdUser(Long idUser) {
-		this.idUser = idUser;
+	public void setUserId(Long idUser) {
+		this.userId = idUser;
 	}
-	public Long getIdTrip() {
-		return idTrip;
+	public Long getTripId() {
+		return tripId;
 	}
-	public void setIdTrip(Long idTrip) {
-		this.idTrip = idTrip;
+	public void setTripId(Long idTrip) {
+		this.tripId = idTrip;
 	}
 	
 	@Override
 	public String toString() {
 		return "Booking [id=" + id + ", nbPerson=" + nbPerson + ", date=" + date + ", status=" + status + ", payed="
-				+ payed + ", idUser=" + idUser + ", idTrip=" + idTrip + "]";
+				+ payed + ", idUser=" + userId + ", idTrip=" + tripId + "]";
 	}
 	
 }
