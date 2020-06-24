@@ -1,6 +1,6 @@
 package com.wildadventure.booking.controllers;
 
-import java.net.URI;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.wildadventure.booking.exceptions.CartNotFoundException;
 import com.wildadventure.booking.models.Cart;
@@ -64,5 +62,24 @@ public class CartController {
 		}
 		
 		return ResponseEntity.status(400).build();
+	}
+	
+	/**
+	 * Delete a cart by its ID
+	 * @param id
+	 * @return
+	 * @throws CartNotFoundException
+	 */
+	@GetMapping("/clean/{id}")
+	public ResponseEntity<Void> cleanCart(@PathVariable int id) throws CartNotFoundException{
+		Optional<Cart> option = cartService.getCartById(new Long(id));
+		if(option.isPresent()) {
+			cartService.cleanCart(option.get().getId());
+			return ResponseEntity.ok().build();
+		}
+		else {
+			throw new CartNotFoundException("Cannot clean cart who do not exists");
+		}
+			
 	}
 }

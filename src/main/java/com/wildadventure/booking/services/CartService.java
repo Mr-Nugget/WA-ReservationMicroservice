@@ -1,5 +1,7 @@
 package com.wildadventure.booking.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,14 +25,13 @@ public class CartService implements ICartService {
 	}
 
 	@Override
-	public Cart getCartById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Optional<Cart> getCartById(Long id) {
+		return cartDao.findById(id);
 	}
 
 	@Override
 	public void cleanCart(Long cartId) {
-		// TODO Auto-generated method stub
+		cartDao.deleteById(cartId);
 
 	}
 

@@ -1,5 +1,7 @@
 package com.wildadventure.booking.services;
 
+import java.util.Optional;
+
 import com.wildadventure.booking.models.Cart;
 
 public interface ICartService {
@@ -8,7 +10,7 @@ public interface ICartService {
 	
 	public Cart addCart(Cart cart);
 	
-	public Cart getCartById(Long id);
+	public Optional<Cart> getCartById(Long id);
 	
 	public void cleanCart(Long cartId);
 	

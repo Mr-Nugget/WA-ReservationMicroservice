@@ -1,6 +1,7 @@
 package com.wildadventure.booking.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.wildadventure.booking.exceptions.BookingAlreadyExistsException;
 import com.wildadventure.booking.exceptions.BookingNotFoundException;
 import com.wildadventure.booking.models.Booking;
+import com.wildadventure.booking.models.UpdatePaymentRequest;
 import com.wildadventure.booking.services.IBookingService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -65,6 +67,33 @@ public class BookingController {
 			}else {
 				return ResponseEntity.status(400).build();
 			}
+		}
+	}
+	
+	/**
+	 * Update boolean payed in booking object
+	 * @param request
+	 * @return
+	 * @throws BookingNotFoundException 
+	 */
+	@PostMapping("/updatePayment")
+	public ResponseEntity<Boolean> updateBookingPayment(@RequestBody UpdatePaymentRequest request) throws BookingNotFoundException{
+		if(request != null) {
+			Optional<Booking> option = bookingService.getBookingById(request.getId());
+			if(option.isPresent()) {
+				Booking oldBooking = option.get();
+				oldBooking.setPayed(request.isPaid());
+				Booking newBooking = bookingService.updateBooking(oldBooking);
+				if(newBooking != null) {
+					return ResponseEntity.ok(new Boolean(true));
+				}else {
+					return ResponseEntity.status(400).build();
+				}
+			}else {
+				throw new BookingNotFoundException("Cannot find booking with id : " + request.getId());
+			}
+		}else {
+			return ResponseEntity.status(400).build();
 		}
 	}
 }

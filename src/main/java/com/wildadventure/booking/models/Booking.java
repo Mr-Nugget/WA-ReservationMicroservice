@@ -35,6 +35,10 @@ public class Booking {
 	@Column(name="TRIP_ID")
 	private Long tripId;
 	
+	public Booking() {
+		
+	}
+	
 	public Booking(Long id, Integer nbPerson, Date date, Integer status, Boolean payed, Long idUser, Long idTrip) {
 		super();
 		this.id = id;
