@@ -1,5 +1,6 @@
 package com.wildadventure.booking.controllers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,8 @@ import com.wildadventure.booking.exceptions.BookingAlreadyExistsException;
 import com.wildadventure.booking.exceptions.BookingNotFoundException;
 import com.wildadventure.booking.models.Booking;
 import com.wildadventure.booking.models.UpdatePaymentRequest;
+import com.wildadventure.booking.models.UserBookingsResponse;
+import com.wildadventure.booking.proxies.ITripProxy;
 import com.wildadventure.booking.services.IBookingService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -28,6 +31,9 @@ public class BookingController {
 	@Autowired
 	private IBookingService bookingService;
 	
+	@Autowired
+	private ITripProxy tripProxy;
+	
 	private static Logger log = Logger.getLogger(BookingController.class);
 	
 	/**
@@ -37,10 +43,14 @@ public class BookingController {
 	 * @throws BookingNotFoundException
 	 */
 	@GetMapping("/byUser/{id}")
-	public ResponseEntity<List<Booking>> getBookingsByUser(@PathVariable int id) throws BookingNotFoundException {
+	public ResponseEntity<List<UserBookingsResponse>> getBookingsByUser(@PathVariable int id) throws BookingNotFoundException {
 		List<Booking> bookings = bookingService.getBookingsByUser(new Long(id));
-		if(bookings != null && bookings.size() > 0) {
-			return ResponseEntity.ok(bookings);
+		List<UserBookingsResponse> response = new ArrayList<UserBookingsResponse>();
+		for(Booking b : bookings) {
+			response.add(new UserBookingsResponse(b, tripProxy.getTripInstanceForBooking(b.getTripId().intValue())));
+		}
+		if(bookings != null && bookings.size() > 0 && !response.isEmpty()) {
+			return ResponseEntity.ok(response);
 		}else {
 			throw new BookingNotFoundException("Cannot find booking with userId : " + id);
 		}
@@ -77,7 +87,7 @@ public class BookingController {
 	 * @throws BookingNotFoundException 
 	 */
 	@PostMapping("/updatePayment")
-	public ResponseEntity<Boolean> updateBookingPayment(@RequestBody UpdatePaymentRequest request) throws BookingNotFoundException{
+	public Booking updateBookingPayment(@RequestBody UpdatePaymentRequest request) throws BookingNotFoundException{
 		if(request != null) {
 			Optional<Booking> option = bookingService.getBookingById(request.getId());
 			if(option.isPresent()) {
@@ -85,15 +95,15 @@ public class BookingController {
 				oldBooking.setPayed(request.isPaid());
 				Booking newBooking = bookingService.updateBooking(oldBooking);
 				if(newBooking != null) {
-					return ResponseEntity.ok(new Boolean(true));
+					return newBooking;
 				}else {
-					return ResponseEntity.status(400).build();
+					return null;
 				}
 			}else {
 				throw new BookingNotFoundException("Cannot find booking with id : " + request.getId());
 			}
 		}else {
-			return ResponseEntity.status(400).build();
+			return null;
 		}
 	}
 }
