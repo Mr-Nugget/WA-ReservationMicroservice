@@ -106,4 +106,16 @@ public class BookingController {
 			return null;
 		}
 	}
+	
+	/**
+	 * Get the number of person associated to a tripId
+	 * @param tripId
+	 * @return
+	 */
+	@GetMapping("/nbOfClient/{tripId}")
+	public ResponseEntity<Integer> getBookingNumber(@PathVariable int tripId) {
+		Integer clientCounter = bookingService.getNumberOfClient(tripId);
+		
+		return ResponseEntity.ok(clientCounter);
+	}
 }

@@ -16,4 +16,6 @@ public interface IBookingService {
 	public Booking addBooking(Booking booking);
 	
 	public Booking updateBooking(Booking booking);
+
+	public Integer getNumberOfClient(int tripId);
 }

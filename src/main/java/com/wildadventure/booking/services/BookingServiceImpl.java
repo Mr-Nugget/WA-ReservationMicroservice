@@ -41,4 +41,16 @@ public class BookingServiceImpl implements IBookingService {
 		return bookingDao.save(booking);
 	}
 
+	@Override
+	public Integer getNumberOfClient(int tripId) {
+		List<Booking> lb = bookingDao.findByTripId(new Long(tripId));
+		Integer counter = 0;
+		
+		for(Booking b : lb) {
+			counter += b.getNbPerson();
+		}
+		
+		return counter;
+	}
+
 }

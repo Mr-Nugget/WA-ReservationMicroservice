@@ -13,5 +13,7 @@ public interface IBookingDao extends JpaRepository<Booking, Long>{
 	public List<Booking> findByUserId(Long userId);
 	
 	public Booking findByTripIdAndUserId(Long tripId, Long userId);
+	
+	public List<Booking> findByTripId(Long tripId);
 
 }
