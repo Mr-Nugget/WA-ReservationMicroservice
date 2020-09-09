@@ -25,6 +25,11 @@ public class Booking {
 	private Integer nbPerson;
 	@Column(name="DATE")
 	private Date date;
+	/**
+	 * 1 -> Incoming
+	 * 2 -> In progress
+	 * 3 -> End
+	 */
 	@Column(name="STATUS")
 	private Integer status;
 	@Column(name="PAYED")
