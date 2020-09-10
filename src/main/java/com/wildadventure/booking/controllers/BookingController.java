@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.wildadventure.booking.exceptions.BookingAlreadyExistsException;
 import com.wildadventure.booking.exceptions.BookingNotFoundException;
+import com.wildadventure.booking.exceptions.BookingStatusErrorException;
 import com.wildadventure.booking.models.Booking;
 import com.wildadventure.booking.models.UpdatePaymentRequest;
 import com.wildadventure.booking.models.UserBookingsResponse;
@@ -69,7 +72,6 @@ public class BookingController {
 		
 		if(existingBooking != null) {
 			throw new BookingAlreadyExistsException("This booking you want to add already exists.");
-			
 		}else {
 			Booking bookingCreated = bookingService.addBooking(booking);
 			if(bookingCreated != null) {
@@ -104,6 +106,33 @@ public class BookingController {
 			}
 		}else {
 			return null;
+		}
+	}
+	
+	/**
+	 * Update booking status after the user comment the trip associated
+	 * @param id
+	 * @return
+	 * @throws BookingNotFoundException
+	 * @throws BookingStatusErrorException
+	 */
+	@GetMapping("/updateStatus/{id}")
+	public ResponseEntity<Void> updateBookingStatus(@PathVariable int id) throws BookingNotFoundException, BookingStatusErrorException{
+		Optional<Booking> optBooking = bookingService.getBookingById(new Long(id));
+		if(optBooking.isPresent()) {
+			Booking booking = optBooking.get();
+			Integer status = booking.getStatus();
+			if(status == 3){
+				// Update status to closed. User cannot comment anymore.
+				booking.setStatus(4);
+				bookingService.updateBooking(booking);
+				return ResponseEntity.ok().build();
+				
+			}else {
+				throw new BookingStatusErrorException();
+			}
+		}else {
+			throw new BookingNotFoundException("Error during updating booking status.");
 		}
 	}
 	
