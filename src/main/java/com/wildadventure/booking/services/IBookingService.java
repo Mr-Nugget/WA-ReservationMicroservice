@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.wildadventure.booking.models.Booking;
+import com.wildadventure.booking.models.UserBookingsResponse;
 
 public interface IBookingService {
 
-	public List<Booking> getBookingsByUser(Long userId);
+	public List<UserBookingsResponse> getBookingsByUser(Long userId);
 	
 	public Optional<Booking> getBookingById(Long id);
 	

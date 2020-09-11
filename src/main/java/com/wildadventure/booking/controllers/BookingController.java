@@ -1,10 +1,9 @@
+
 package com.wildadventure.booking.controllers;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import javax.transaction.Transactional;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import com.wildadventure.booking.exceptions.BookingStatusErrorException;
 import com.wildadventure.booking.models.Booking;
 import com.wildadventure.booking.models.UpdatePaymentRequest;
 import com.wildadventure.booking.models.UserBookingsResponse;
-import com.wildadventure.booking.proxies.ITripProxy;
 import com.wildadventure.booking.services.IBookingService;
 
 @CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
@@ -33,10 +31,7 @@ public class BookingController {
 	
 	@Autowired
 	private IBookingService bookingService;
-	
-	@Autowired
-	private ITripProxy tripProxy;
-	
+		
 	private static Logger log = Logger.getLogger(BookingController.class);
 	
 	/**
@@ -47,12 +42,8 @@ public class BookingController {
 	 */
 	@GetMapping("/byUser/{id}")
 	public ResponseEntity<List<UserBookingsResponse>> getBookingsByUser(@PathVariable int id) throws BookingNotFoundException {
-		List<Booking> bookings = bookingService.getBookingsByUser(new Long(id));
-		List<UserBookingsResponse> response = new ArrayList<UserBookingsResponse>();
-		for(Booking b : bookings) {
-			response.add(new UserBookingsResponse(b, tripProxy.getTripInstanceForBooking(b.getTripId().intValue())));
-		}
-		if(bookings != null && bookings.size() > 0 && !response.isEmpty()) {
+		List<UserBookingsResponse> response = bookingService.getBookingsByUser(new Long(id));
+		if(!response.isEmpty()) {
 			return ResponseEntity.ok(response);
 		}else {
 			throw new BookingNotFoundException("Cannot find booking with userId : " + id);

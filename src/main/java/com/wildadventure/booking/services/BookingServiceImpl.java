@@ -1,13 +1,18 @@
 package com.wildadventure.booking.services;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.wildadventure.booking.dao.IBookingDao;
 import com.wildadventure.booking.models.Booking;
+import com.wildadventure.booking.models.UserBookingsResponse;
+import com.wildadventure.booking.proxies.ITripProxy;
 
 
 @Service
@@ -16,9 +21,19 @@ public class BookingServiceImpl implements IBookingService {
 	@Autowired
 	private IBookingDao bookingDao;
 	
+	@Autowired
+	private ITripProxy tripProxy;
+	
 	@Override
-	public List<Booking> getBookingsByUser(Long userId) {
-		return bookingDao.findByUserId(userId);
+	@Transactional
+	public List<UserBookingsResponse> getBookingsByUser(Long userId) {
+		List<Booking> bookings = bookingDao.findByUserId(userId);
+		List<UserBookingsResponse> response = new ArrayList<UserBookingsResponse>();
+		
+		for(Booking b : bookings) {
+			response.add(new UserBookingsResponse(b, tripProxy.getTripInstanceForBooking(b.getTripId().intValue())));
+		}
+		return response;
 	}
 
 	@Override
