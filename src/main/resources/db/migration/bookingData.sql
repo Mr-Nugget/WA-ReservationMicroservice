@@ -1,1 +1,0 @@
-INSERT INTO BOOKING (booking_id, date, nb_person, payed, status, trip_id, user_id) VALUES(1, '06/12/2019',2, TRUE, 3, 4, 1);

@@ -118,6 +118,19 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+				<groupId>org.flywaydb</groupId>
+				<artifactId>flyway-maven-plugin</artifactId>
+				<configuration>
+					<user>wildadventure</user>
+					<password>WA2020</password>
+					<url>jdbc:postgresql://localhost:5432/wa_booking
+					</url>
+					<schemas>
+						<schema>wa_booking</schema>
+					</schemas>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>
