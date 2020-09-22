@@ -6,9 +6,12 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
 @SpringBootApplication
 @EnableFeignClients("com.wildadventure")
 @EnableTransactionManagement
+@EnableSwagger2
 @EnableDiscoveryClient
 public class BookingApplication {
 
