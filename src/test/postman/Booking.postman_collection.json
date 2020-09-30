@@ -1,0 +1,240 @@
+{
+	"info": {
+		"_postman_id": "2654b21c-c59b-4fe8-91a3-cb6f59386997",
+		"name": "Booking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:11090/Booking/nbOfClient/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"paid\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:11090/Booking/nbOfClient/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "11090",
+					"path": [
+						"Booking",
+						"nbOfClient",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:11090/Booking/byUser/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 2,\r\n    \"paid\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:11090/Booking/byUser/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "11090",
+					"path": [
+						"Booking",
+						"byUser",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:11090/Booking/add",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0X3JhaW1iYXVsdEB5YWhvby5mciIsImV4cCI6MTU5MjQzNjMwOSwiaWF0IjoxNTkyNDAwMzA5fQ.PVdnwcChqu656O52PDp5EwVoOofrExu2Ug1Pa5oya3Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0X3JhaW1iYXVsdEB5YWhvby5mciIsImV4cCI6MTU5MjMzODQ2NiwiaWF0IjoxNTkyMzAyNDY2fQ._EHYCv9oFMg7BMgBvq3viPb6LuZHLJGLiGjkUwSg2bE",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nbPerson\": 5,\r\n    \"date\" : \"2020-06-10\",\r\n    \"status\": 2,\r\n    \"payed\": false,\r\n    \"userId\": 1,\r\n    \"tripId\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:11090/Booking/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "11090",
+					"path": [
+						"Booking",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:11090/Booking/updatePayment",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"paid\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:11090/Booking/updatePayment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "11090",
+					"path": [
+						"Booking",
+						"updatePayment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:11090/Cart/clean/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0X3JhaW1iYXVsdEB5YWhvby5mciIsImV4cCI6MTU5MjQzNjMwOSwiaWF0IjoxNTkyNDAwMzA5fQ.PVdnwcChqu656O52PDp5EwVoOofrExu2Ug1Pa5oya3Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0X3JhaW1iYXVsdEB5YWhvby5mciIsImV4cCI6MTU5MjMzODQ2NiwiaWF0IjoxNTkyMzAyNDY2fQ._EHYCv9oFMg7BMgBvq3viPb6LuZHLJGLiGjkUwSg2bE",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nbPerson\": 3,\r\n    \"date\" : \"2020-06-22\",\r\n    \"status\": 1,\r\n    \"payed\": false,\r\n    \"userId\": 1,\r\n    \"tripId\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:11090/Cart/clean/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "11090",
+					"path": [
+						"Cart",
+						"clean",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:11090/Cart/byUser/1",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0X3JhaW1iYXVsdEB5YWhvby5mciIsImV4cCI6MTU5MjAwNDEyOSwiaWF0IjoxNTkxOTY4MTI5fQ.qEPnq_4GvNk4WeV9_LWbMt2IHqgO7FIbRs2NvpT34l4"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mail\" : \"t_raimbault@yahoo.fr\",\r\n    \"password\": \"nimvav94\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:11090/Cart/byUser/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "11090",
+					"path": [
+						"Cart",
+						"byUser",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
